@@ -14,7 +14,89 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      helmet_detections: {
+        Row: {
+          alert_sent: boolean | null
+          bounding_box: Json | null
+          confidence: number
+          created_at: string
+          detection_timestamp: string
+          has_helmet: boolean
+          id: string
+          image_data: string | null
+          location: string | null
+          worker_id: string | null
+        }
+        Insert: {
+          alert_sent?: boolean | null
+          bounding_box?: Json | null
+          confidence: number
+          created_at?: string
+          detection_timestamp?: string
+          has_helmet: boolean
+          id?: string
+          image_data?: string | null
+          location?: string | null
+          worker_id?: string | null
+        }
+        Update: {
+          alert_sent?: boolean | null
+          bounding_box?: Json | null
+          confidence?: number
+          created_at?: string
+          detection_timestamp?: string
+          has_helmet?: boolean
+          id?: string
+          image_data?: string | null
+          location?: string | null
+          worker_id?: string | null
+        }
+        Relationships: []
+      }
+      safety_alerts: {
+        Row: {
+          acknowledged: boolean | null
+          alert_type: string
+          created_at: string
+          detection_id: string | null
+          email_sent: boolean | null
+          id: string
+          message: string
+          severity: string
+          updated_at: string
+        }
+        Insert: {
+          acknowledged?: boolean | null
+          alert_type?: string
+          created_at?: string
+          detection_id?: string | null
+          email_sent?: boolean | null
+          id?: string
+          message: string
+          severity?: string
+          updated_at?: string
+        }
+        Update: {
+          acknowledged?: boolean | null
+          alert_type?: string
+          created_at?: string
+          detection_id?: string | null
+          email_sent?: boolean | null
+          id?: string
+          message?: string
+          severity?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "safety_alerts_detection_id_fkey"
+            columns: ["detection_id"]
+            isOneToOne: false
+            referencedRelation: "helmet_detections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
